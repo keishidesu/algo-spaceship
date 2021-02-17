@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <cstring>
 
 #define PLANET_COUNT 10
 #define FILE_NAME "A2planets.txt"

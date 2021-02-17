@@ -16,11 +16,13 @@ class Edge : public Printable {
     Edge();
     Edge(Planet p1, Planet p2);
     float getLength();
+    std::string getName();
     std::string toString();
   private:
     Planet p1;
     Planet p2;
     float length;
+    std::string name;
 };
 
 #endif
