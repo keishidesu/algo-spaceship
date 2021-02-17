@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <algorithm>
 
 #ifdef BUILD_GENERATOR
 #include "generator.h"
@@ -50,6 +51,35 @@ void setupStaticRelationship() {
   Planet::planets[4].addNeighbours(Planet::planets[8]);
   Planet::planets[4].addNeighbours(Planet::planets[2]);
 }
+
+int** setupAdjacencyMatrix() {
+  int** adjacencymatrix = 0;
+  adjacencymatrix = new int*[PLANET_COUNT];
+  for(int i = 0; i < PLANET_COUNT; i++){
+    adjacencymatrix[i] = new int[PLANET_COUNT];
+    for(int j = 0; j < PLANET_COUNT; j++){
+      if (i == j ){
+        adjacencymatrix[i][j] = 0;
+        continue;
+      }
+      std::string name = std::string(1, (char)(i + 65)) + (char)(j + 65);
+      auto it = std::find_if(Edge::edges.begin(), Edge::edges.end(), [&name](Edge obj) {
+        if (obj.getName() == name)
+          return true;
+        reverse(name.begin(), name.end());
+        return obj.getName() == name;});
+      if(it != Edge::edges.end()){
+        auto index = std::distance(Edge::edges.begin(), it);
+        adjacencymatrix[i][j] = Edge::edges[index].getLength();
+      }
+      else{
+        adjacencymatrix[i][j] = 0;
+      }
+    }
+  }
+
+  return adjacencymatrix;
+}
 #endif
 
 #ifdef BUILD_GENERATOR
@@ -91,6 +121,17 @@ int main()
   // expecting 10 planets...
   loadPlanets(PLANET_COUNT);
   setupStaticRelationship();
+  //adjacency matrix
+  std::cout << "Planets adjacency matrix:" << std::endl;
+  std::cout << "\tA\tB\tC\tD\tE\tF\tG\tH\tI\tJ" << std::endl;
+  int** adjMatrix = setupAdjacencyMatrix();
+  for(int i = 0; i < PLANET_COUNT; i++){
+    std::cout << (char)(i + 65) << "\t";
+    for(int j = 0; j < PLANET_COUNT; j++){
+      std:: cout << adjMatrix[i][j] << "\t";
+    }
+    std::cout << std::endl;
+  }
   // adjacency list
   std::cout << "Planets adjacency list:" << std::endl;
   for (Planet p : Planet::planets) {
