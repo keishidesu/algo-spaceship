@@ -15,9 +15,14 @@
 #include "edge.h"
 #endif
 
-#ifdef BUILD_PROGRAM_3
-#include "dynamicProg.h"
+#ifdef BUILD_PROGRAM_2
+#include "dijkstra.h"
+#include "edge.h"
 #endif
+
+// #ifdef BUILD_PROGRAM_3
+// #include "dynamicProg.h"
+// #endif
 
 #define PLANET_COUNT 10
 #define FILE_NAME "A2planets.txt"
@@ -157,12 +162,20 @@ int main()
   }
 #endif
 
-
-#ifdef BUILD_PROGRAM_3
+#ifdef BUILD_PROGRAM_2
+  // expecting 10 planets...
   loadPlanets(PLANET_COUNT);
-  DynamicProg(Planet::planets);
-
+  setupStaticRelationship();
+  int** adjMatrix = setupAdjacencyMatrix();
+  Dijkstra dij(adjMatrix, 0);
 #endif
+
+
+// #ifdef BUILD_PROGRAM_3
+//   loadPlanets(PLANET_COUNT);
+//   DynamicProg(Planet::planets);
+
+// #endif
 
   return 0;
 }
