@@ -5,6 +5,7 @@
 
 #include "dijkstra.h"
 #include "edge.h"
+#include "planet.h"
 
 #include <string>
 #include <vector>
@@ -33,7 +34,7 @@ Dijkstra::Dijkstra(int** matrix, int init){
     }
   }
 
-  printDistance(distance);
+  printDistance(distance, path);
   printPath(path, distance);
 
 }
@@ -50,10 +51,12 @@ int Dijkstra::minDistance(int dist[], bool Tset[]) {
 	return index;
 }
 
-void Dijkstra::printDistance(int distance[]){
+void Dijkstra::printDistance(int distance[], std::string path[]){
+  std::cout << "Planets list" << std::endl;
   for(int i = 0; i < SIZE; i++){
-    char str=65 + i;
-		std::cout << str << "\t" << distance[i] << std::endl;
+    char planet = 65 + i;
+    int pd = i == 0 ? -1 : (int)path[i][path[i].length()-2]-65;
+		std::cout << i << ":" << Planet::planets[i].toString() << ", [Distance:" << distance[i] << "], " << "[Predecessor: " << pd << "]" << std::endl;
   }
 }
 
@@ -222,13 +225,12 @@ void Dijkstra::display(char m[7][7])
 }
 
 void Dijkstra::printPath(std::string path[], int distance[]){
+  char map[7][7];
+  initmap(map);
   for(int i = 0; i < SIZE; i++){
-    std::cout<< "A to " << (char)(65 + i) << " took " << distance[i] << std::endl;
     if(distance[i] == 0) continue;
-    char map[7][7];
-    initmap(map);
     connectEdges(map, path[i]);
-    display(map);
   }
+  display(map);
 }
 #endif
