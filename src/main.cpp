@@ -16,6 +16,7 @@
 #endif
 
 #ifdef BUILD_PROGRAM_3
+#include "edge.h"
 #include "dynamicProg.h"
 #endif
 
