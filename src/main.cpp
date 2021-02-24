@@ -2,6 +2,8 @@
 #include <fstream>
 #include <algorithm>
 
+#include "edge.h"
+
 #ifdef BUILD_GENERATOR
 #include "generator.h"
 #endif
@@ -12,7 +14,6 @@
 
 #ifdef BUILD_PROGRAM_1
 #include "sort.h"
-#include "edge.h"
 #endif
 
 #define PLANET_COUNT 10
@@ -73,7 +74,7 @@ int** setupAdjacencyMatrix() {
         adjacencymatrix[i][j] = Edge::edges[index].getLength();
       }
       else{
-        adjacencymatrix[i][j] = 0;
+        adjacencymatrix[i][j] = -1;
       }
     }
   }
