@@ -15,6 +15,10 @@
 #include "edge.h"
 #endif
 
+#ifdef BUILD_PROGRAM_3
+#include "dynamicProg.h"
+#endif
+
 #define PLANET_COUNT 10
 #define FILE_NAME "A2planets.txt"
 
@@ -151,6 +155,12 @@ int main()
   for (Edge e : Edge::edges) {
     e.println();
   }
+#endif
+
+#ifdef BUILD_PROGRAM_3
+  loadPlanets(PLANET_COUNT);
+  DynamicProg(Planet::planets);
+
 #endif
 
   return 0;
