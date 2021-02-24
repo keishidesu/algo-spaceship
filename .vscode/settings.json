@@ -41,6 +41,12 @@
     "sstream": "cpp",
     "stdexcept": "cpp",
     "streambuf": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "iterator": "cpp",
+    "bit": "cpp",
+    "cstring": "cpp",
+    "functional": "cpp",
+    "numeric": "cpp",
+    "random": "cpp"
   }
 }
