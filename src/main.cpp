@@ -20,9 +20,10 @@
 #include "edge.h"
 #endif
 
-// #ifdef BUILD_PROGRAM_3
-// #include "dynamicProg.h"
-// #endif
+#ifdef BUILD_PROGRAM_3
+#include "edge.h"
+#include "dynamicProg.h"
+#endif
 
 #define PLANET_COUNT 10
 #define FILE_NAME "A2planets.txt"
@@ -170,12 +171,11 @@ int main()
   Dijkstra dij(adjMatrix, 0);
 #endif
 
+#ifdef BUILD_PROGRAM_3
+  loadPlanets(PLANET_COUNT);
+  DynamicProg(Planet::planets);
 
-// #ifdef BUILD_PROGRAM_3
-//   loadPlanets(PLANET_COUNT);
-//   DynamicProg(Planet::planets);
-
-// #endif
+#endif
 
   return 0;
 }
