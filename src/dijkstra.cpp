@@ -27,7 +27,8 @@ Dijkstra::Dijkstra(int** matrix, int init){
     if (path[index].find((char)(index + 65)) == std::string::npos)
       path[index] += std::string(1, (char)(index + 65));
     for(int j = 0; j < SIZE; j++){
-      if(!visited[j] && matrix[index][j] && distance[index] != INF && distance[index] + matrix[index][j] < distance[j]){
+      if(!visited[j] && matrix[index][j] > 0 && distance[index] != INF && distance[index] + matrix[index][j] < distance[j]){
+        std::cout << "distance: " << distance[index] << "matrix: " << matrix[index][j] << std::endl;
         distance[j] = distance[index] + matrix[index][j];
         path[j] = path[index] + (char)(j + 65);
       }
