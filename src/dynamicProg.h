@@ -10,11 +10,10 @@
 
 class DynamicProg {
   public: 
+    DynamicProg(std::vector<Planet> planets);
     const int MAX = 80;
     const int COUNT = 10;
-    std::vector<Planet> items;
-    DynamicProg(std::vector<Planet> planets);
-    // void knapsack01(Planet items, int weight);
+    int** knapsack(std::vector<Planet> items);
 };
 
 #endif
